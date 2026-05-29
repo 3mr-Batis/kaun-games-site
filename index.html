@@ -5,21 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KAUN Games — Mobile Game Studio</title>
   <meta name="description" content="KAUN Games — Crafting addictive mobile experiences. Hypercasual games built for everyone." />
-  <link rel="icon" href="kaun_v2_icon.png" type="image/png" />
+  <link rel="icon" href="kaun_icon_play.png" type="image/png" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+    /* Brand typography: Tektur (display) + Jura (body) */
+    @import url('https://fonts.googleapis.com/css2?family=Tektur:wght@500;600;700;800&family=Jura:wght@300;400;500;600&display=swap');
 
+    /* Official KAUN brand palette (per Brand Identity Guidelines) */
     :root {
-      --gold: #c9a84c;
-      --gold-light: #f0cc6e;
-      --plasma: #00d4ff;
-      --plasma-dim: #0099bb;
-      --black: #000000;
-      --dark: #080808;
-      --card: #0f0f0f;
-      --border: #1a1a1a;
-      --text: #e8e8e8;
-      --muted: #666;
+      --gold: #D0A53C;
+      --gold-light: #F6DE8C;
+      --bronze: #6E4A1A;
+      --plasma: #3CE6D6;
+      --plasma-dim: #185A56;
+      --black: #06060A;
+      --dark: #0E0E14;
+      --card: #0E0E14;
+      --border: #2C2A32;
+      --text: #E4E0D6;
+      --muted: #9A9288;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,7 +30,7 @@
     body {
       background: var(--black);
       color: var(--text);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Jura', sans-serif;
       overflow-x: hidden;
     }
 
@@ -48,8 +51,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,212,255,0.06) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(201,168,76,0.05) 0%, transparent 60%);
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(60,230,214,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(208,165,60,0.05) 0%, transparent 60%);
       pointer-events: none;
     }
 
@@ -62,19 +65,19 @@
       width: 160px;
       height: 160px;
       object-fit: contain;
-      filter: drop-shadow(0 0 40px rgba(0,212,255,0.3)) drop-shadow(0 0 80px rgba(201,168,76,0.2));
+      filter: drop-shadow(0 0 40px rgba(60,230,214,0.3)) drop-shadow(0 0 80px rgba(208,165,60,0.2));
     }
 
     .plasma-ring {
       position: absolute;
       inset: -20px;
       border-radius: 50%;
-      border: 1px solid rgba(0,212,255,0.15);
+      border: 1px solid rgba(60,230,214,0.15);
       animation: pulse-ring 3s ease-in-out infinite;
     }
     .plasma-ring:nth-child(2) {
       inset: -40px;
-      border-color: rgba(201,168,76,0.08);
+      border-color: rgba(208,165,60,0.08);
       animation-delay: 1s;
     }
 
@@ -94,15 +97,16 @@
     }
 
     h1 {
-      font-size: clamp(52px, 10vw, 96px);
-      font-weight: 900;
-      letter-spacing: -2px;
-      line-height: 1;
-      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 40%, var(--plasma) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-family: 'Tektur', sans-serif;
+      font-size: clamp(52px, 10vw, 92px);
+      font-weight: 700;
+      letter-spacing: 2px;
+      line-height: 1.02;
+      color: var(--gold-light);
       margin-bottom: 12px;
+    }
+    h1 .games {
+      color: var(--plasma);
     }
 
     .tagline {
@@ -115,16 +119,44 @@
       margin-bottom: 48px;
     }
 
+    /* Signature plasma line — thin glowing core + end nodes (plasma ring / gold core) */
     .plasma-bar {
-      width: 80px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--plasma), transparent);
+      position: relative;
+      width: 220px;
+      height: 14px;
       margin: 0 auto 48px;
-      animation: bar-glow 2s ease-in-out infinite;
     }
+    .plasma-bar::before {
+      content: '';
+      position: absolute;
+      left: 7px; right: 7px;
+      top: 50%; transform: translateY(-50%);
+      height: 2px;
+      background: var(--plasma);
+      box-shadow: 0 0 6px var(--plasma), 0 0 14px var(--plasma-dim);
+      animation: bar-glow 2.4s ease-in-out infinite;
+    }
+    .plasma-bar .node {
+      position: absolute;
+      top: 50%;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--plasma);
+      box-shadow: 0 0 10px var(--plasma);
+      transform: translate(-50%, -50%);
+    }
+    .plasma-bar .node::after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      background: var(--gold-light);
+    }
+    .plasma-bar .node.left  { left: 7px; }
+    .plasma-bar .node.right { left: calc(100% - 7px); }
     @keyframes bar-glow {
-      0%, 100% { opacity: 0.5; width: 60px; }
-      50%       { opacity: 1;   width: 100px; }
+      0%, 100% { opacity: 0.7; }
+      50%       { opacity: 1; }
     }
 
     .cta-group {
@@ -155,16 +187,16 @@
     }
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(201,168,76,0.4);
+      box-shadow: 0 8px 30px rgba(208,165,60,0.4);
     }
 
     .btn-outline {
       background: transparent;
       color: var(--plasma);
-      border: 1px solid rgba(0,212,255,0.3);
+      border: 1px solid rgba(60,230,214,0.3);
     }
     .btn-outline:hover {
-      background: rgba(0,212,255,0.08);
+      background: rgba(60,230,214,0.08);
       border-color: var(--plasma);
       transform: translateY(-2px);
     }
@@ -186,11 +218,12 @@
     }
 
     .section-title {
-      font-size: clamp(28px, 5vw, 48px);
-      font-weight: 800;
-      color: #fff;
+      font-family: 'Tektur', sans-serif;
+      font-size: clamp(28px, 5vw, 46px);
+      font-weight: 700;
+      color: var(--text);
       margin-bottom: 16px;
-      line-height: 1.1;
+      line-height: 1.12;
     }
 
     .section-sub {
@@ -221,15 +254,15 @@
     .game-card:hover {
       border-color: var(--gold);
       transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(201,168,76,0.1);
+      box-shadow: 0 20px 60px rgba(208,165,60,0.1);
     }
 
     .game-card.featured {
-      border-color: rgba(0,212,255,0.3);
+      border-color: rgba(60,230,214,0.3);
     }
     .game-card.featured:hover {
       border-color: var(--plasma);
-      box-shadow: 0 20px 60px rgba(0,212,255,0.12);
+      box-shadow: 0 20px 60px rgba(60,230,214,0.12);
     }
 
     .game-card::before {
@@ -261,9 +294,10 @@
     }
 
     .game-title {
+      font-family: 'Tektur', sans-serif;
       font-size: 24px;
-      font-weight: 800;
-      color: #fff;
+      font-weight: 600;
+      color: var(--text);
       margin-bottom: 10px;
     }
 
@@ -283,14 +317,14 @@
       letter-spacing: 1px;
     }
     .badge-live {
-      background: rgba(0,212,255,0.12);
+      background: rgba(60,230,214,0.12);
       color: var(--plasma);
-      border: 1px solid rgba(0,212,255,0.2);
+      border: 1px solid rgba(60,230,214,0.2);
     }
     .badge-soon {
-      background: rgba(201,168,76,0.1);
+      background: rgba(208,165,60,0.1);
       color: var(--gold);
-      border: 1px solid rgba(201,168,76,0.2);
+      border: 1px solid rgba(208,165,60,0.2);
     }
 
     /* ── PHILOSOPHY ── */
@@ -330,8 +364,8 @@
       width: 36px;
       height: 36px;
       border-radius: 8px;
-      background: rgba(201,168,76,0.1);
-      border: 1px solid rgba(201,168,76,0.2);
+      background: rgba(208,165,60,0.1);
+      border: 1px solid rgba(208,165,60,0.2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -378,7 +412,7 @@
       border-color: var(--plasma);
       color: var(--plasma);
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(0,212,255,0.15);
+      box-shadow: 0 8px 30px rgba(60,230,214,0.15);
     }
 
     /* ── FOOTER ── */
@@ -399,13 +433,13 @@
     }
 
     .footer-brand {
+      font-family: 'Tektur', sans-serif;
       font-size: 18px;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--gold), var(--plasma));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--gold-light);
     }
+    .footer-brand .games { color: var(--plasma); }
 
     .footer-copy {
       font-size: 12px;
@@ -453,12 +487,12 @@
   <div class="logo-wrap">
     <div class="plasma-ring"></div>
     <div class="plasma-ring"></div>
-    <img src="kaun_v2_logo.png" alt="KAUN Games Logo" />
+    <img src="kaun_icon_play.png" alt="KAUN Games Logo" />
   </div>
 
   <p class="studio-label">Mobile Game Studio</p>
-  <h1>KAUN<br>Games</h1>
-  <div class="plasma-bar"></div>
+  <h1>KAUN<br><span class="games">Games</span></h1>
+  <div class="plasma-bar"><span class="node left"></span><span class="node right"></span></div>
   <p class="tagline">Crafting addictive mobile experiences that fit in your pocket and stay in your mind.</p>
 
   <div class="cta-group">
@@ -553,7 +587,7 @@
     </div>
   </div>
 
-  <div style="text-align:center; opacity:0.15; font-size:clamp(120px,20vw,200px); font-weight:900; line-height:1; background:linear-gradient(135deg,#c9a84c,#00d4ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; user-select:none;">K</div>
+  <div style="text-align:center; opacity:0.16; font-family:'Tektur',sans-serif; font-size:clamp(120px,20vw,200px); font-weight:800; line-height:1; color:var(--gold); user-select:none;">K</div>
 </div>
 
 <div class="divider"></div>
@@ -573,7 +607,7 @@
 <!-- ══ FOOTER ══ -->
 <footer>
   <div class="footer-inner">
-    <span class="footer-brand">KAUN Games</span>
+    <span class="footer-brand">KAUN <span class="games">Games</span></span>
     <span class="footer-copy">© 2026 KAUN Games · Saudi Arabia · All rights reserved</span>
   </div>
 </footer>
